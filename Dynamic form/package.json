@@ -13,6 +13,24 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
+
+ 
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/" }
+    ],
+    
+    "builds": [
+      {
+        "src": "vite.config.js",
+        "use": "@vercel/static-build"
+      }
+    ],
+    "routes": [
+      { "source": "/(.*)", "destination": "/" }
+    ],
+  
+  
+
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/react": "^19.0.10",
