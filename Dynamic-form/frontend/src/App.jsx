@@ -144,20 +144,20 @@
 
 // export default App;
 
-import React, { useState } from 'react';
-import Questionscomponent from './Questionscomponent';
-import './App.css';
-import { useNavigate } from 'react-router-dom';
+// import React, { useState } from 'react';
+// import Questionscomponent from './Questionscomponent';
+// import './App.css';
+// import { useNavigate } from 'react-router-dom';
 
-function App() {
-  const [QnList, setQnList] = useState([]); // Store list of questions
-  const navigate = useNavigate();
+// function App() {
+//   const [QnList, setQnList] = useState([]); // Store list of questions
+//   const navigate = useNavigate();
 
-  // Function to add new question
-  const viewQuestions = (e) => {
-    e.preventDefault();
-    setQnList((prev) => [...prev, {}]);
-  };
+//   // Function to add new question
+//   const viewQuestions = (e) => {
+//     e.preventDefault();
+//     setQnList((prev) => [...prev, {}]);
+//   };
   // const publish = () => {
   //   const formId = Date.now().toString(); // Unique ID
   //   const formDetails = {
@@ -171,15 +171,29 @@ function App() {
   
   //   const url = `${baseURL}/form/${formId}`;
   //   alert(`Form published! Share this URL: ${url}`);
-  // };
+  // };import React, { useState } from 'react';
+import Questionscomponent from './Questionscomponent';
+import './App.css';
+
+function App() {
+  const [QnList, setQnList] = useState([]); // Store list of questions
+
+  // Function to add a new question
+  const viewQuestions = (e) => {
+    e.preventDefault();
+    setQnList((prev) => [...prev, {}]);
+  };
+
+  // Publish function to send form data to the backend
   const publish = async () => {
     const formId = Date.now().toString(); // Unique ID
     const formDetails = {
       title: "My Form",
-      questions: [...QnList], // Save your form data here
+      questions: [...QnList], // Store questions in the state
     };
   
     try {
+      // Send form data to the backend using fetch
       const response = await fetch('/api/form/create', {
         method: 'POST',
         headers: {
@@ -187,9 +201,10 @@ function App() {
         },
         body: JSON.stringify(formDetails),
       });
-  
+
       if (response.status === 201) {
         const data = await response.json();
+        // Construct the shareable URL with the form ID
         const url = `${window.location.origin}/form/${data.formId}`;
         alert(`Form published! Share this URL: ${url}`);
       } else {
@@ -200,9 +215,6 @@ function App() {
       alert('Failed to publish the form');
     }
   };
-  
-  
-  
 
   return (
     <>
@@ -217,6 +229,7 @@ function App() {
         <div className='Questions'>
           <button type="button" onClick={viewQuestions}>Add questions</button>
 
+          {/* Dynamically render Question components */}
           {QnList.map((_, index) => (
             <Questionscomponent key={index} index={index + 1} />
           ))}
