@@ -174,7 +174,7 @@
   // };import React, { useState } from 'react';
 import Questionscomponent from './Questionscomponent';
 import './App.css';
-
+import { useState } from 'react';
 function App() {
   const [QnList, setQnList] = useState([]); // Store list of questions
 
