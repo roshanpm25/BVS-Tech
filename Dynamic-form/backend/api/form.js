@@ -20,23 +20,15 @@
 // module.exports = Form;
 // api/Form.js// Inside your `form.js` or model fileconst mongoose = require('mongoose');
 
-
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-// Define the form schema
-const formSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  questions: [
-    {
-      type: { type: String, required: true },  // 'short_answer', 'radio', etc.
-      label: { type: String, required: true },
-      options: [String],  // Options for multiple choice questions
-      defaultValue: { type: String, default: '' },
-      disabled: { type: Boolean, default: true },  // Whether the question is disabled in preview mode
-    }
-  ],
-  disabled: { type: Boolean, default: true },  // If true, form is in preview mode
+const formSchema = new Schema({
+  title: String,
+  description: String,
+  questions: Array,
 });
 
-module.exports = mongoose.model('Form', formSchema);  // Export the form model
+const Form = mongoose.models.Form || mongoose.model('Form', formSchema); // Check if model exists first
+
+module.exports = Form;

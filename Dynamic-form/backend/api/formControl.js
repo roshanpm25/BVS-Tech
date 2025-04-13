@@ -1,6 +1,5 @@
 const Form = require('./form');  // Use relative path with './' instead of absolute path
 
-
 // Create a new form
 exports.createForm = async (req, res) => {
   const { title, description, questions } = req.body;
