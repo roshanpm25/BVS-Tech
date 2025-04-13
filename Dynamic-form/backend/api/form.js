@@ -19,25 +19,24 @@
 
 // module.exports = Form;
 // api/Form.js// Inside your `form.js` or model fileconst mongoose = require('mongoose');
-const cors = require('cors');
-const { json } = require('express');
-const formRoutes = require('./formRoutes');
-const connectDB = require('../utils/mongodb');
 
-connectDB();
 
-module.exports = async (req, res) => {
-  // Allow CORS and JSON body parsing manually (serverless workaround)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization');
+const mongoose = require('mongoose');
 
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
+// Define the form schema
+const formSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  questions: [
+    {
+      type: { type: String, required: true },  // 'short_answer', 'radio', etc.
+      label: { type: String, required: true },
+      options: [String],  // Options for multiple choice questions
+      defaultValue: { type: String, default: '' },
+      disabled: { type: Boolean, default: true },  // Whether the question is disabled in preview mode
+    }
+  ],
+  disabled: { type: Boolean, default: true },  // If true, form is in preview mode
+});
 
-  return formRoutes(req, res); // Delegate routing logic
-};
-
+module.exports = mongoose.model('Form', formSchema);  // Export the form model
