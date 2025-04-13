@@ -1,0 +1,308 @@
+/* Title Container */
+.Title {
+  background-color: rgb(245, 196, 245);
+  padding: 16px;
+}
+
+/* Input and Textarea styling */
+.Title input,
+.Title textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 6px 0;
+  font-size: 16px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s ease;
+  resize: none;
+}
+
+.Title input:focus,
+.Title textarea:focus {
+  border-bottom: 2px solid #000;
+}
+
+.Title textarea {
+  min-height: 80px;
+}
+
+/* Question Template Container */
+.Questiontemplate {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  width: 70%;  /* Adjust this value for the desired width */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;  /* This will center the element */
+}
+
+
+/* Label for input fields */
+.Questiontemplate label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Question input styling (reduced to half width) */
+.Questiontemplate input {
+  width: 50%; /* Reduced to half width */
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #d9d5d9;
+  background-color: rgb(241, 241, 241);
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.Questiontemplate input:focus {
+  border-bottom: 2px solid #510b6b;
+  outline: none;
+}
+
+/* Image icon styling */
+.image_icon {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* Wrapper styles for 1st row (question input, file upload, and dropdown) */
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* For File Upload label */
+.wrapper label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Custom Dropdown Styling */
+.custom-dropdown {
+  position: relative;
+  width: 250px;
+  font-family: Arial;
+}
+
+.dropdown-selected {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 10;
+  border-radius: 4px;
+  margin-top: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-option {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #eee;
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+  color: #666;
+}
+
+/* Short Answer Field - Visible when short_answer is selected */
+.short-answer-container {
+  margin-top: 20px;
+  width: 100%;
+  background-color: white;
+}
+
+/* .answers {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+ 
+} */
+
+.answers input{
+  background-color: white;
+}
+
+.answers textarea{
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 50%;
+  border-bottom: 2px solid #d4d3d4;
+}
+
+.answers textarea:focus{
+  border-bottom: 2px solid #510b6b;
+ outline :none;
+}
+
+.multiple-choice-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.option-row input[type="radio"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.option-input {
+  flex: 1;
+  padding: 4px 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-option-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.add-option-btn {
+  background-color: #6200ea;
+  color: white;
+  padding: 5px 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 15%;
+}
+
+.add-option-btn:hover {
+  background-color: #4b00b5;
+}
+
+.delete-option-btn button{
+  outline: none;
+ background-color: #ffffff;
+ padding: 10px;
+ border: none;
+}
+
+/* Base styling for the checkbox container */
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cb-option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.cb-option-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.cb-option-row input[type="checkbox"]:checked {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.cb-option-row input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+/* Styling for the text input next to the checkbox */
+.cb-option-row input[type="text"] {
+  border: 2px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 200px;
+  transition: border-color 0.2s ease;
+}
+
+.cb-option-row input[type="text"]:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+/* Add button for adding a new option */
+.add-option-btn-1 {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  width: 25%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-option-btn-1:hover {
+  background-color: #1565c0;
+}
+
+.add-option-btn-1:active {
+  background-color: #0d47a1;
+}
+
+/* Delete button for removing an option */
+.delete-option-btn button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.time-picker-container input:hover{
+cursor: pointer;
+}
+
