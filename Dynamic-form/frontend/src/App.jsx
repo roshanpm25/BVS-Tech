@@ -144,76 +144,33 @@
 
 // export default App;
 
-// import React, { useState } from 'react';
-// import Questionscomponent from './Questionscomponent';
-// import './App.css';
-// import { useNavigate } from 'react-router-dom';
-
-// function App() {
-//   const [QnList, setQnList] = useState([]); // Store list of questions
-//   const navigate = useNavigate();
-
-//   // Function to add new question
-//   const viewQuestions = (e) => {
-//     e.preventDefault();
-//     setQnList((prev) => [...prev, {}]);
-//   };
-  // const publish = () => {
-  //   const formId = Date.now().toString(); // Unique ID
-  //   const formDetails = {
-  //     title: "My Form",
-  //     questions: [...QnList], // Save your form data here
-  //   };
-  //   localStorage.setItem(`form_${formId}`, JSON.stringify(formDetails));
-  
-  //   // 💡 Always use the Vercel live URL here
-  //   const baseURL = 'https://dynamic-form-roshan-p-ms-projects.vercel.app';
-  
-  //   const url = `${baseURL}/form/${formId}`;
-  //   alert(`Form published! Share this URL: ${url}`);
-  // };import React, { useState } from 'react';
+import React, { useState } from 'react';
 import Questionscomponent from './Questionscomponent';
 import './App.css';
-import { useState } from 'react';
+
 function App() {
   const [QnList, setQnList] = useState([]); // Store list of questions
 
-  // Function to add a new question
+  // Function to add new question
   const viewQuestions = (e) => {
     e.preventDefault();
     setQnList((prev) => [...prev, {}]);
   };
 
-  // Publish function to send form data to the backend
-  const publish = async () => {
+  // Publish function to save form locally and generate a URL
+  const publish = () => {
     const formId = Date.now().toString(); // Unique ID
     const formDetails = {
       title: "My Form",
-      questions: [...QnList], // Store questions in the state
+      questions: [...QnList], // Save your questions in the state
     };
   
-    try {
-      // Send form data to the backend using fetch
-      const response = await fetch('/api/form/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formDetails),
-      });
+    // Save the form details in localStorage
+    localStorage.setItem(`form_${formId}`, JSON.stringify(formDetails));
 
-      if (response.status === 201) {
-        const data = await response.json();
-        // Construct the shareable URL with the form ID
-        const url = `${window.location.origin}/form/${data.formId}`;
-        alert(`Form published! Share this URL: ${url}`);
-      } else {
-        alert('Failed to publish the form');
-      }
-    } catch (error) {
-      console.error('Error publishing form', error);
-      alert('Failed to publish the form');
-    }
+    // Generate the URL to share
+    const url = `${window.location.origin}/form/${formId}`;
+    alert(`Form published! Share this URL: ${url}`);
   };
 
   return (
