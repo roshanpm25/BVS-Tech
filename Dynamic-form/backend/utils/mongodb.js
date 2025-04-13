@@ -14,21 +14,27 @@
 // };
 
 // module.exports = connectDB;
-
 const mongoose = require('mongoose');
 
-const formSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  questions: [
-    {
-      type: { type: String, required: true }, // short_answer, paragraph, radio, checkbox, etc.
-      label: { type: String, required: true },
-      defaultValue: { type: String, default: '' },
-      disabled: { type: Boolean, default: true }, // Default to true (disabled by default)
-      options: [String], // For radio and checkbox questions
-    },
-  ],
-  disabled: { type: Boolean, default: true }, // If true, form is in preview mode
-});
+let cached = global.mongoose;
 
-module.exports = mongoose.model('Form', formSchema);
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
+async function connectDB() {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    const uri = process.env.MONGODB_URI;
+    cached.promise = mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }).then((mongoose) => mongoose);
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+module.exports = connectDB;

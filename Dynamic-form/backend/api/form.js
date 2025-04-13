@@ -18,16 +18,26 @@
 // const Form = mongoose.model('Form', formSchema);
 
 // module.exports = Form;
-// api/Form.js// Inside your `form.js` or model file
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// api/Form.js// Inside your `form.js` or model fileconst mongoose = require('mongoose');
+const cors = require('cors');
+const { json } = require('express');
+const formRoutes = require('./formRoutes');
+const connectDB = require('../utils/mongodb');
 
-const formSchema = new Schema({
-  title: String,
-  description: String,
-  questions: Array,
-});
+connectDB();
 
-const Form = mongoose.models.Form || mongoose.model('Form', formSchema); // Check if model exists first
+module.exports = async (req, res) => {
+  // Allow CORS and JSON body parsing manually (serverless workaround)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization');
 
-module.exports = Form;
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  return formRoutes(req, res); // Delegate routing logic
+};
+
