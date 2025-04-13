@@ -20,6 +20,11 @@
   transition: border-color 0.3s ease;
   resize: none;
 }
+.Title input{
+  outline: none;
+  border: none;
+  
+}
 
 .Title input:focus,
 .Title textarea:focus {

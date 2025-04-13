@@ -20,6 +20,8 @@ const viewQuestions=(e)=>{
 
   return (
     <>
+<button className="publish">Publish</button>
+
   <form>
 
       <div className='Title'>
