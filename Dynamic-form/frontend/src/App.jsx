@@ -158,19 +158,47 @@ function App() {
     e.preventDefault();
     setQnList((prev) => [...prev, {}]);
   };
-  const publish = () => {
+  // const publish = () => {
+  //   const formId = Date.now().toString(); // Unique ID
+  //   const formDetails = {
+  //     title: "My Form",
+  //     questions: [...QnList], // Save your form data here
+  //   };
+  //   localStorage.setItem(`form_${formId}`, JSON.stringify(formDetails));
+  
+  //   // 💡 Always use the Vercel live URL here
+  //   const baseURL = 'https://dynamic-form-roshan-p-ms-projects.vercel.app';
+  
+  //   const url = `${baseURL}/form/${formId}`;
+  //   alert(`Form published! Share this URL: ${url}`);
+  // };
+  const publish = async () => {
     const formId = Date.now().toString(); // Unique ID
     const formDetails = {
       title: "My Form",
       questions: [...QnList], // Save your form data here
     };
-    localStorage.setItem(`form_${formId}`, JSON.stringify(formDetails));
   
-    // 💡 Always use the Vercel live URL here
-    const baseURL = 'https://dynamic-form-roshan-p-ms-projects.vercel.app';
+    try {
+      const response = await fetch('/api/form/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDetails),
+      });
   
-    const url = `${baseURL}/form/${formId}`;
-    alert(`Form published! Share this URL: ${url}`);
+      if (response.status === 201) {
+        const data = await response.json();
+        const url = `${window.location.origin}/form/${data.formId}`;
+        alert(`Form published! Share this URL: ${url}`);
+      } else {
+        alert('Failed to publish the form');
+      }
+    } catch (error) {
+      console.error('Error publishing form', error);
+      alert('Failed to publish the form');
+    }
   };
   
   
